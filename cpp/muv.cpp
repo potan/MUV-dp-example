@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string>
 
-#define const
+//#define const
 
 template <typename Message> struct View {
 	virtual const Message * run() const = 0;
@@ -34,14 +34,14 @@ template <typename CurModel> struct ProcessorImpl : public Processor {
 
 struct Logined : public Model {
 	struct Message {
-                const virtual Model * process(const Logined * m) = 0;
+                const virtual Model * process(const Logined * m) const = 0;
 		virtual ~Message() {};
         };
 	struct Logout : public Message {
-		const Model * process(const Logined * m);
+		const Model * process(const Logined * m) const;
 	};
 	struct Greet : public Message {
-		const Model * process(const Logined * m);
+		const Model * process(const Logined * m) const;
 	};
 
 	const std::string name;
@@ -113,9 +113,9 @@ const Model * Logined::Greet::process(const Logined * m) const {
 };
 
 int main(int argc, char ** argv) {
-	Processor * p = new ProcessorImpl<Logouted>(new Logouted());
+	const Processor * p = new ProcessorImpl<Logouted>(new Logouted());
 	while(true) {
-		Processor * pnew = p->next();
+		const Processor * pnew = p->next();
 		delete p;
 		p = pnew;
 	}

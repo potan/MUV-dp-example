@@ -14,7 +14,6 @@ struct Processor {
 };
 
 struct Model {
-	class Message;
 	virtual ~Model() {};
 	virtual const Processor *processor() const = 0;
 };

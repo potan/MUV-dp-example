@@ -1,7 +1,14 @@
 
 
-data Application : (model:Type) -> (msg: model -> Type) -> (vtype : Type -> Type) -> Type where
-  MUV : model -> (updater : (m:model) -> (msg m) -> model) -> (view : (m:model) -> vtype (msg m)) -> Application model msg vtype
+data Application : (model:Type) ->
+                   (msg: model -> Type) ->
+                   (vtype : Type -> Type) ->
+                   Type
+where
+  MUV : model ->
+        (updater : (m:model) -> (msg m) -> model) ->
+        (view : (m:model) -> vtype (msg m)) ->
+        Application model msg vtype
 
 muvRun : (Application modelType msgType IO) -> IO a
 muvRun (MUV model updater view) =

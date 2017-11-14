@@ -1,4 +1,4 @@
-name := "json template"
+name := "Model-Updater-View demo"
 
 version := "0.1"
 
